@@ -431,14 +431,14 @@
       <div class="panel-title">★ ¿DUDAS? LO VEMOS EN CLASE</div>
       <p>Envíame tu <b>email escrito</b> + tu <b>grabación de las 5 frases</b> por WhatsApp. Y para practicar con otros estudiantes, <b>únete a la comunidad de Discord</b> 👇</p>
       <a class="btn wa-btn" id="waCta" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WHATSAPP</a>
-      <a class="btn dc-btn" id="dcCta" href="#" onclick="return copyDiscord(this, true)"><i class="fa-brands fa-discord"></i> DISCORD</a>
+      <a class="btn dc-btn" id="dcCta" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> DISCORD</a>
     </div>
     <div class="btn-row"><button class="btn" onclick="location.reload()">↻ TRY AGAIN</button></div>
   </div>
 
   <div class="social" id="socialBar">
     <a class="so-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-    <a class="so-dc" href="#" onclick="return copyDiscord(this)" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+    <a class="so-dc" href="#" target="_blank" rel="noopener" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     <a class="so-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
     <a class="so-li" href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
     <a class="so-tap" href="#" target="_blank" rel="noopener" aria-label="Taplink"><i class="fa-solid fa-link"></i></a>
@@ -498,27 +498,16 @@ const SOCIAL = {
   instagram: "https://www.instagram.com/englishforall_dan/",
   linkedin: "https://www.linkedin.com/in/daniel-s-6572926b/?locale=es",
   taplink: "https://englishforall.taplink.site",
-  discord: "daniel.s.20"
-  // Switch Discord to a real community SERVER invite later: set `discord` to the
-  // "https://discord.gg/XXXX" link, then turn the .so-dc icon + #dcCta button into
-  // plain hrefs (remove the copyDiscord onclick) so one click opens the invite.
+  discord: "https://discord.gg/t4Be69GNk"
 };
 (function initSocial() {
   document.querySelectorAll(".so-wa").forEach(a => a.href = SOCIAL.whatsapp);
   document.querySelectorAll(".so-ig").forEach(a => a.href = SOCIAL.instagram);
   document.querySelectorAll(".so-li").forEach(a => a.href = SOCIAL.linkedin);
   document.querySelectorAll(".so-tap").forEach(a => a.href = SOCIAL.taplink);
-  document.querySelectorAll(".so-dc").forEach(a => a.title = "Discord: " + SOCIAL.discord + " (clic para copiar)");
+  document.querySelectorAll(".so-dc").forEach(a => a.href = SOCIAL.discord);
+  var dc = document.getElementById("dcCta"); if (dc) dc.href = SOCIAL.discord;
 })();
-function copyDiscord(el, isButton) {
-  const restore = el.innerHTML;
-  const done = () => {
-    el.innerHTML = '<i class="fa-solid fa-check"></i>' + (isButton ? " ¡COPIADO!" : "");
-    setTimeout(() => { el.innerHTML = restore; }, 1600);
-  };
-  try { navigator.clipboard.writeText(SOCIAL.discord).then(done, done); } catch (e) { done(); }
-  return false;
-}
 
 // ===== Generic reveal toggle (transcript + model answers + vocab) =====
 function toggleReveal(id, btn) {
