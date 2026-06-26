@@ -155,7 +155,7 @@
   .rankup-sub { color: var(--muted); font-size: 0.9rem; letter-spacing: 1px; }
   .contact-box { background: #00e5ff0d; border: 1px solid var(--cyan); border-radius: 12px; padding: 18px 20px; margin: 20px 0 4px; box-shadow: 0 0 10px #00e5ff22; font-size: 0.95rem; }
   .contact-box b { color: var(--gold); }
-  .wa-btn { background: linear-gradient(180deg, #2fd36b, #128c5e); border-color: #8af2b5; box-shadow: 0 0 14px #2fd36b77; margin-top: 14px; }
+  .wa-btn { background: linear-gradient(180deg, #2fd36b, #128c5e); border-color: #8af2b5; box-shadow: 0 0 14px #2fd36b77; margin-top: 14px; color:#fff; text-shadow:0 0 6px #000; }
   .wa-btn:hover { box-shadow: 0 0 22px #2fd36baa; }
   .dc-btn { background: linear-gradient(180deg, #5865f2, #3b45c4); border-color: #aab1ff; box-shadow: 0 0 14px #5865f277; margin-top: 14px; margin-left: 8px; }
   .dc-btn:hover { box-shadow: 0 0 22px #5865f2aa; }
@@ -431,7 +431,7 @@
       <div class="panel-title">★ ¿DUDAS? LO VEMOS EN CLASE</div>
       <p>Envíame tu <b>email escrito</b> + tu <b>grabación de las 5 frases</b> por WhatsApp. Y para practicar con otros estudiantes, <b>únete a la comunidad de Discord</b> 👇</p>
       <a class="btn wa-btn" id="waCta" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WHATSAPP</a>
-      <a class="btn dc-btn" id="dcCta" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> SERVIDOR DISCORD</a>
+      <a class="btn dc-btn" id="dcCta" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> DISCORD</a>
       <a class="btn" href="https://calendly.com/daniel-seoane-lopez/trial" target="_blank" rel="noopener" style="background:linear-gradient(180deg,#ffd45e,#e8a317);border-color:#ffe08a;box-shadow:0 0 14px #ffc83d77;color:#fff;text-shadow:0 0 6px #000;margin-top:12px"><i class="fa-solid fa-calendar-check"></i> RESERVAR CLASE GRATIS</a>
       <p class="es" style="margin-top:12px">¿Quieres más? <a href="https://danielseoanelopez.github.io/englishforall/" target="_blank" rel="noopener" style="color:var(--cyan)">Haz el test de nivel gratis</a> &middot; <a href="https://danielseoanelopez.github.io/englishforall/PLANS.html" target="_blank" rel="noopener" style="color:var(--cyan)">Ver planes</a></p>
     </div>
@@ -500,16 +500,17 @@ const SOCIAL = {
   instagram: "https://www.instagram.com/englishforall_dan/",
   linkedin: "https://www.linkedin.com/in/daniel-s-6572926b/?locale=es",
   taplink: "https://englishforall.taplink.site",
-  discord: "https://discord.gg/t4Be69GNk"
+  discord: "daniel.s.20"
 };
 (function initSocial() {
   document.querySelectorAll(".so-wa").forEach(a => a.href = SOCIAL.whatsapp);
   document.querySelectorAll(".so-ig").forEach(a => a.href = SOCIAL.instagram);
   document.querySelectorAll(".so-li").forEach(a => a.href = SOCIAL.linkedin);
   document.querySelectorAll(".so-tap").forEach(a => a.href = SOCIAL.taplink);
-  document.querySelectorAll(".so-dc").forEach(a => a.href = SOCIAL.discord);
-  var dc = document.getElementById("dcCta"); if (dc) dc.href = SOCIAL.discord;
+  document.querySelectorAll(".so-dc").forEach(a => { a.setAttribute("onclick", "return copyDiscord(this)"); a.title = "Discord: " + SOCIAL.discord + " (clic para copiar)"; });
+  var dc = document.getElementById("dcCta"); if (dc) dc.setAttribute("onclick", "return copyDiscord(this)");
 })();
+function copyDiscord(el){ var r=el.innerHTML; var done=function(){ el.innerHTML='<i class="fa-solid fa-check"></i>'+(el.classList.contains("btn")?" ¡COPIADO!":""); setTimeout(function(){el.innerHTML=r;},1500); }; try{ navigator.clipboard.writeText(SOCIAL.discord).then(done,done); }catch(e){ done(); } return false; }
 
 // ===== Generic reveal toggle (transcript + model answers + vocab) =====
 function toggleReveal(id, btn) {
